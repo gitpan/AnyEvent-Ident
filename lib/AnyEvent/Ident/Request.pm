@@ -6,7 +6,7 @@ use v5.10;
 use Carp qw( croak );
 
 # ABSTRACT: Simple asynchronous ident response
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 sub new
 {
@@ -53,7 +53,7 @@ AnyEvent::Ident::Request - Simple asynchronous ident response
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 ATTRIBUTES
 

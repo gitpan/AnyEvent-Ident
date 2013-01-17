@@ -38,12 +38,13 @@
       "bugtracker" : {
          "web" : "https://github.com/plicease/AnyEvent-Ident/issues"
       },
+      "homepage" : "http://search.cpan.org/dist/AnyEvent-Ident/",
       "repository" : {
          "type" : "git",
          "url" : "git://github.com/plicease/AnyEvent-Ident.git",
          "web" : "https://github.com/plicease/AnyEvent-Ident"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
 

@@ -14,6 +14,7 @@ lib/AnyEvent/Ident/Request.pm
 lib/AnyEvent/Ident/Response.pm
 lib/AnyEvent/Ident/Server.pm
 lib/AnyEvent/Ident/Transaction.pm
+t/alt_res_class.t
 t/client.t
 t/request.t
 t/response.t

@@ -8,7 +8,7 @@ use base qw( Exporter );
 our @EXPORT_OK = qw( ident_server ident_client );
 
 # ABSTRACT: Simple asynchronous ident client and server
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 
 sub ident_server
@@ -51,7 +51,7 @@ AnyEvent::Ident - Simple asynchronous ident client and server
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
