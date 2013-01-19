@@ -8,7 +8,7 @@ use base qw( Exporter );
 our @EXPORT_OK = qw( ident_server ident_client );
 
 # ABSTRACT: Simple asynchronous ident client and server
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 
 sub ident_server
@@ -51,7 +51,7 @@ AnyEvent::Ident - Simple asynchronous ident client and server
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -136,6 +136,11 @@ peek at the test suite for L<Mojolicious::Plugin::Ident> to see what I mean.
 
 =back
 
+Sometimes L<Net::Ident> might be more appropriate.  L<Net::Ident> has only
+core dependencies and will work on older Perls.  This module requires
+L<AnyEvent> and perl 5.10.0 or better.  L<Net::Ident> may be easier to wrap
+your head around if you don't need or want to run under an event loop.
+
 =head1 CAVEATS
 
 ident is an oldish protocol and almost nobody uses it anymore.  The RFC for the
@@ -153,7 +158,7 @@ Most of the time a client wanting to use the ident protocol expects to find
 ident listening to port 113, which on many platforms (such as UNIX) requires
 special privileges (such as root).
 
-Under Linux you can use C<iptables> to forward requests to port 113 to
+Under Linux you can use C<iptables> to forward requests from port 113 to
 an unprivileged port.  I was able to use this incantation to forward port 113
 to port 8113:
 

@@ -22,4 +22,4 @@ resources:
   bugtracker: https://github.com/plicease/AnyEvent-Ident/issues
   homepage: http://search.cpan.org/dist/AnyEvent-Ident/
   repository: git://github.com/plicease/AnyEvent-Ident.git
-version: 0.02
+version: 0.03

@@ -12,7 +12,7 @@ use AnyEvent::Ident::Transaction;
 use Carp qw( croak carp );
 
 # ABSTRACT: Simple asynchronous ident server
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 
 sub new
@@ -112,7 +112,7 @@ AnyEvent::Ident::Server - Simple asynchronous ident server
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -134,7 +134,14 @@ version 0.02
 
 =head1 DESCRIPTION
 
-Provide a simple asynchronous ident server.
+Provide a simple asynchronous ident server.  This class manages 
+connections and handles client errors for you, but you have to provide 
+an implementation which determines the owner for a connection given a 
+server and client port. This class may also be useful for testing ident 
+clients against (see the test suite in this distribution, it uses this 
+class to test L<AnyEvent::Ident::Client>), or for constructing an ident 
+server which always returns the same user (which may be useful for some 
+applications, such as IRC).
 
 =head1 CONSTRUCTOR
 
