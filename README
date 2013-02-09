@@ -2,7 +2,7 @@ NAME
     AnyEvent::Ident - Simple asynchronous ident client and server
 
 VERSION
-    version 0.04
+    version 0.05
 
 SYNOPSIS
     client:

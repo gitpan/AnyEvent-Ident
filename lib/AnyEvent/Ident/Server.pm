@@ -12,7 +12,7 @@ use AnyEvent::Ident::Transaction;
 use Carp qw( croak carp );
 
 # ABSTRACT: Simple asynchronous ident server
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 
 sub new
@@ -104,7 +104,7 @@ AnyEvent::Ident::Server - Simple asynchronous ident server
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

@@ -3,12 +3,13 @@ package AnyEvent::Ident;
 use strict;
 use warnings;
 use v5.10;
+use Exporter ();
 
 our @ISA = qw( Exporter );
 our @EXPORT_OK = qw( ident_server ident_client );
 
 # ABSTRACT: Simple asynchronous ident client and server
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 
 sub ident_server
@@ -53,7 +54,7 @@ AnyEvent::Ident - Simple asynchronous ident client and server
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 

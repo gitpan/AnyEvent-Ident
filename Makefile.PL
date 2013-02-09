@@ -26,7 +26,7 @@ my %WriteMakefileArgs = (
     "AnyEvent::Handle" => 0,
     "AnyEvent::Socket" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t"
   }
