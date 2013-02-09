@@ -6,7 +6,7 @@ use v5.10;
 use AnyEvent::Ident::Response;
 
 # ABSTRACT: Simple asynchromous ident transaction
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 
 sub req { shift->{req} }
@@ -48,6 +48,7 @@ sub remote_address { shift->{remote_address} }
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -56,7 +57,7 @@ AnyEvent::Ident::Transaction - Simple asynchromous ident transaction
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 METHODS
 
@@ -147,4 +148,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

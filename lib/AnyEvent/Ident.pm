@@ -3,22 +3,23 @@ package AnyEvent::Ident;
 use strict;
 use warnings;
 use v5.10;
-use base qw( Exporter );
 
+our @ISA = qw( Exporter );
 our @EXPORT_OK = qw( ident_server ident_client );
 
 # ABSTRACT: Simple asynchronous ident client and server
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 
 sub ident_server
 {
   my $hostname = shift;
   my $port     = shift;
+  my $cb       = shift;
   require AnyEvent::Ident::Server;
   my $server = AnyEvent::Ident::Server
-    ->new( hostname => $hostname, port => $port )
-    ->start(@_);
+    ->new( hostname => $hostname, port => $port, %{ $_[0] // {} } )
+    ->start($cb);
   # keep the server object in scope so that
   # we don't unbind from the port.  If you 
   # don't want this, then use the OO interface
@@ -43,6 +44,7 @@ sub ident_client
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -51,7 +53,7 @@ AnyEvent::Ident - Simple asynchronous ident client and server
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -186,4 +188,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

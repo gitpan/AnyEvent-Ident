@@ -5,7 +5,7 @@ use warnings;
 use v5.10;
 
 # ABSTRACT: Simple asynchromous ident response
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 sub new
 {
@@ -85,6 +85,7 @@ sub error_type { shift->{error_type} }
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -93,7 +94,7 @@ AnyEvent::Ident::Response - Simple asynchromous ident response
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 ATTRIBUTES
 
@@ -162,4 +163,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

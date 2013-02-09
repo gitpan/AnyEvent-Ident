@@ -12,7 +12,7 @@ use AnyEvent::Ident::Transaction;
 use Carp qw( croak carp );
 
 # ABSTRACT: Simple asynchronous ident server
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 
 
 sub new
@@ -23,6 +23,7 @@ sub new
     hostname => $args->{hostname},  
     port     => $args->{port}     // 113,
     on_error => $args->{on_error} // sub { carp $_[0] },
+    on_bind  => $args->{on_bind}  // sub { },
   }, $class;
 }
 
@@ -69,22 +70,12 @@ sub start
       })
     });
   };
-  
-  if($self->{port} == 0)
-  {
-    my $done = AnyEvent->condvar;
-    $self->{guard} = tcp_server $self->{hostname}, undef, $cb, sub {
-      my($fh, $host, $port) = @_;
-      $self->{bindport} = $port;
-      $done->send;
-    };
-    $done->recv;
-  }
-  else
-  {
-    $self->{guard} = tcp_server $self->{hostname}, $self->{port}, $cb;
-    $self->{bindport} = $self->{port};
-  }
+
+  $self->{guard} = tcp_server $self->{hostname}, $self->{port}, $cb, sub {
+    my($fh, $host, $port) = @_;
+    $self->{bindport} = $port;
+    $self->{on_bind}->($self);
+  };
   
   $self;
 }
@@ -104,6 +95,7 @@ sub stop
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -112,7 +104,7 @@ AnyEvent::Ident::Server - Simple asynchronous ident server
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -168,6 +160,13 @@ on_error (carp error)
 A callback subref to be called on error (either connection or transmission error).
 Passes the error string as the first argument to the callback.
 
+=item *
+
+on_bind
+
+A callback subref to be called when the socket has been bound to a port.  Useful
+when using an ephemeral and you do not know the port number in advance.
+
 =back
 
 =head2 $server-E<gt>start( $callback )
@@ -204,4 +203,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
