@@ -2,7 +2,6 @@ package AnyEvent::Ident::Server;
 
 use strict;
 use warnings;
-use v5.10;
 use AnyEvent;
 use AnyEvent::Socket qw( tcp_server );
 use AnyEvent::Handle;
@@ -12,18 +11,20 @@ use AnyEvent::Ident::Transaction;
 use Carp qw( croak carp );
 
 # ABSTRACT: Simple asynchronous ident server
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 
 sub new
 {
   my $class = shift;
-  my $args     = ref $_[0] eq 'HASH' ? (\%{$_[0]}) : ({@_});
+  my $args  = ref $_[0] eq 'HASH' ? (\%{$_[0]}) : ({@_});
+  my $port  = $args->{port};
+  $port = 113 unless defined $port;
   bless {
     hostname => $args->{hostname},  
-    port     => $args->{port}     // 113,
-    on_error => $args->{on_error} // sub { carp $_[0] },
-    on_bind  => $args->{on_bind}  // sub { },
+    port     => $port,
+    on_error => $args->{on_error} || sub { carp $_[0] },
+    on_bind  => $args->{on_bind}  || sub { },
   }, $class;
 }
 
@@ -98,13 +99,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 AnyEvent::Ident::Server - Simple asynchronous ident server
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

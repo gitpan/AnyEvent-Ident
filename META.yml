@@ -3,23 +3,26 @@ abstract: 'Simple asynchronous ident client and server'
 author:
   - 'Graham Ollis <plicease@cpan.org>'
 build_requires:
-  Test::More: 0
+  Module::Build: '0.3601'
+  Test::More: '0'
 configure_requires:
-  ExtUtils::MakeMaker: 6.30
+  Module::Build: '0.3601'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.140640'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: AnyEvent-Ident
+recommends:
+  EV: '0'
 requires:
-  AnyEvent: 0
-  AnyEvent::Handle: 0
-  AnyEvent::Socket: 0
-  perl: v5.10.0
+  AnyEvent: '0'
+  AnyEvent::Handle: '0'
+  AnyEvent::Socket: '0'
+  perl: '5.006'
 resources:
-  bugtracker: https://github.com/plicease/AnyEvent-Ident/issues
-  homepage: http://search.cpan.org/dist/AnyEvent-Ident/
-  repository: git://github.com/plicease/AnyEvent-Ident.git
-version: 0.05
+  bugtracker: https://github.com/plicease/anyevent-ident/issues
+  homepage: http://perl.wdlabs.com/AnyEvent-Ident/
+  repository: git://github.com/plicease/anyevent-ident.git
+version: '0.06'

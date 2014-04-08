@@ -2,15 +2,20 @@ package AnyEvent::Ident;
 
 use strict;
 use warnings;
-use v5.10;
 use Exporter ();
 
 our @ISA = qw( Exporter );
 our @EXPORT_OK = qw( ident_server ident_client );
 
 # ABSTRACT: Simple asynchronous ident client and server
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
+
+# keep the server object in scope so that
+# we don't unbind from the port.  If you 
+# don't want this, then use the OO interface
+# for ::Server instead.
+my $keep = [];
 
 sub ident_server
 {
@@ -19,13 +24,8 @@ sub ident_server
   my $cb       = shift;
   require AnyEvent::Ident::Server;
   my $server = AnyEvent::Ident::Server
-    ->new( hostname => $hostname, port => $port, %{ $_[0] // {} } )
+    ->new( hostname => $hostname, port => $port, %{ $_[0] || {} } )
     ->start($cb);
-  # keep the server object in scope so that
-  # we don't unbind from the port.  If you 
-  # don't want this, then use the OO interface
-  # for ::Server instead.
-  state $keep = [];
   push @$keep, $server;
   return $server;
 }
@@ -48,13 +48,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 AnyEvent::Ident - Simple asynchronous ident client and server
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -66,8 +68,8 @@ client:
    my($res) = @_; # isa AnyEvent::Client::Response 
    if($res->is_success)
    {
-     say "user: ", $res->username;
-     say "os:   ", $res->os;
+     print "user: ", $res->username, "\n"
+     print "os:   ", $res->os, "\n"
    }
    else
    {
@@ -141,7 +143,7 @@ peek at the test suite for L<Mojolicious::Plugin::Ident> to see what I mean.
 
 Sometimes L<Net::Ident> might be more appropriate.  L<Net::Ident> has only
 core dependencies and will work on older Perls.  This module requires
-L<AnyEvent> and perl 5.10.0 or better.  L<Net::Ident> may be easier to wrap
+L<AnyEvent>.  L<Net::Ident> may be easier to wrap
 your head around if you don't need or want to run under an event loop.
 
 =head1 CAVEATS

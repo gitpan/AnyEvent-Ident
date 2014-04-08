@@ -2,10 +2,9 @@ package AnyEvent::Ident::Response;
 
 use strict;
 use warnings;
-use v5.10;
 
-# ABSTRACT: Simple asynchromous ident response
-our $VERSION = '0.05'; # VERSION
+# ABSTRACT: Simple asynchronous ident response
+our $VERSION = '0.06'; # VERSION
 
 sub new
 {
@@ -28,7 +27,7 @@ sub new
       shift @list;
       ($self->{os}, $self->{charset}) = split /\s,\s*/, shift @list;
       $self->{username} = shift @list;
-      $self->{charset} //= 'US-ASCII';
+      $self->{charset} ||= 'US-ASCII';
     }
     else
     {
@@ -49,7 +48,7 @@ sub new
        charset     => $args->{charset},
        error_type  => $args->{error_type},
      }, $class;
-     $self->{os} //= 'OTHER';
+     $self->{os} = 'OTHER' unless defined $self->{os};
      if($self->{error_type})
      {
        $self->{raw} = join(':', join(',', $self->{server_port}, $self->{client_port}), 'ERROR', $self->{error_type});
@@ -88,13 +87,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-AnyEvent::Ident::Response - Simple asynchromous ident response
+AnyEvent::Ident::Response - Simple asynchronous ident response
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 ATTRIBUTES
 

@@ -4,7 +4,7 @@
       "Graham Ollis <plicease@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.140640",
    "license" : [
       "perl_5"
    ],
@@ -14,17 +14,25 @@
    },
    "name" : "AnyEvent-Ident",
    "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Module::Build" : "0.3601"
+         }
+      },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.30"
+            "Module::Build" : "0.3601"
          }
       },
       "runtime" : {
+         "recommends" : {
+            "EV" : "0"
+         },
          "requires" : {
             "AnyEvent" : "0",
             "AnyEvent::Handle" : "0",
             "AnyEvent::Socket" : "0",
-            "perl" : "v5.10.0"
+            "perl" : "5.006"
          }
       },
       "test" : {
@@ -36,15 +44,15 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/plicease/AnyEvent-Ident/issues"
+         "web" : "https://github.com/plicease/anyevent-ident/issues"
       },
-      "homepage" : "http://search.cpan.org/dist/AnyEvent-Ident/",
+      "homepage" : "http://perl.wdlabs.com/AnyEvent-Ident/",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/plicease/AnyEvent-Ident.git",
-         "web" : "https://github.com/plicease/AnyEvent-Ident"
+         "url" : "git://github.com/plicease/anyevent-ident.git",
+         "web" : "https://github.com/plicease/anyevent-ident"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }
 

@@ -2,11 +2,10 @@ package AnyEvent::Ident::Request;
 
 use strict;
 use warnings;
-use v5.10;
 use Carp qw( croak );
 
 # ABSTRACT: Simple asynchronous ident response
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 sub new
 {
@@ -48,13 +47,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 AnyEvent::Ident::Request - Simple asynchronous ident response
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 ATTRIBUTES
 

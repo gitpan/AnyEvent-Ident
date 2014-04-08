@@ -2,11 +2,10 @@ package AnyEvent::Ident::Transaction;
 
 use strict;
 use warnings;
-use v5.10;
 use AnyEvent::Ident::Response;
 
-# ABSTRACT: Simple asynchromous ident transaction
-our $VERSION = '0.05'; # VERSION
+# ABSTRACT: Simple asynchronous ident transaction
+our $VERSION = '0.06'; # VERSION
 
 
 sub req { shift->{req} }
@@ -16,7 +15,8 @@ sub reply_with_user
 {
   my $self = shift;
   my $username = pop;
-  my $os = shift // 'OTHER';
+  my $os = shift;
+  $os = 'OTHER' unless defined $os;
   $self->{cb}->(
     AnyEvent::Ident::Response->new(
       req      => $self->{req},
@@ -51,13 +51,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
-AnyEvent::Ident::Transaction - Simple asynchromous ident transaction
+AnyEvent::Ident::Transaction - Simple asynchronous ident transaction
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 METHODS
 

@@ -1,20 +1,23 @@
 NAME
+
     AnyEvent::Ident - Simple asynchronous ident client and server
 
 VERSION
-    version 0.05
+
+    version 0.06
 
 SYNOPSIS
+
     client:
 
      use AnyEvent::Ident qw( ident_client );
- 
+     
      ident_client '127.0.0.1', 113, $server_port, $client_port, sub {
        my($res) = @_; # isa AnyEvent::Client::Response 
        if($res->is_success)
        {
-         say "user: ", $res->username;
-         say "os:   ", $res->os;
+         print "user: ", $res->username, "\n"
+         print "os:   ", $res->os, "\n"
        }
        else
        {
@@ -25,7 +28,7 @@ SYNOPSIS
     server:
 
      use AnyEvent::Ident qw( ident_server );
- 
+     
      ident_server '127.0.0.1', 113, sub {
        my $tx = shift;
        if($tx->req->server_port == 400
@@ -40,47 +43,53 @@ SYNOPSIS
      };
 
 DESCRIPTION
+
     This module provides a simple procedural interface to
     AnyEvent::Ident::Client and AnyEvent::Ident::Server.
 
 FUNCTIONS
-  ident_server $hostname, $port, $callback
+
+ ident_server $hostname, $port, $callback
+
     Start an ident server listening to the address given by $hostname on
     port $port. For each request $callback will be called and passed in an
     instance of AnyEvent::Ident::Transaction.
 
-  ident_client $hostname, $port, $server_port, $client_port, $callback
+ ident_client $hostname, $port, $server_port, $client_port, $callback
+
     Make an ident request with the ident server at $hostname on port $port
-    with the given port pair "$server_port,$client_port". When the response
+    with the given port pair $server_port,$client_port. When the response
     comes back call $callback, with an instance of
     AnyEvent::Ident::Response.
 
 WHY
+
     Why use this distribution instead of Net::Ident?
 
-    *   Works under Windows (MSWin32)
+      * Works under Windows (MSWin32)
 
-        Net::Ident installs (even passing its tests) on Windows, but it does
-        not work. It may not work in some UNIX environments depending on
-        your headers and libraries.
+      Net::Ident installs (even passing its tests) on Windows, but it does
+      not work. It may not work in some UNIX environments depending on your
+      headers and libraries.
 
-    *   Works with AnyEvent
+      * Works with AnyEvent
 
-        This distribution will work with any event loop supported by
-        AnyEvent.
+      This distribution will work with any event loop supported by
+      AnyEvent.
 
-    *   Server Included
+      * Server Included
 
-        This distribution comes with a server, which is handy for testing
-        (take a peek at the test suite for Mojolicious::Plugin::Ident to see
-        what I mean.
+      This distribution comes with a server, which is handy for testing
+      (take a peek at the test suite for Mojolicious::Plugin::Ident to see
+      what I mean.
 
-    Sometimes Net::Ident might be more appropriate. Net::Ident has only core
-    dependencies and will work on older Perls. This module requires AnyEvent
-    and perl 5.10.0 or better. Net::Ident may be easier to wrap your head
-    around if you don't need or want to run under an event loop.
+    Sometimes Net::Ident might be more appropriate. Net::Ident has only
+    core dependencies and will work on older Perls. This module requires
+    AnyEvent. Net::Ident may be easier to wrap your head around if you
+    don't need or want to run under an event loop.
 
 CAVEATS
+
     ident is an oldish protocol and almost nobody uses it anymore. The RFC
     for the protocol clearly states that ident should not be used for
     authentication, at most it should be used only for audit (for example
@@ -94,12 +103,12 @@ CAVEATS
     have specifically enabled it.
 
     Most of the time a client wanting to use the ident protocol expects to
-    find ident listening to port 113, which on many platforms (such as UNIX)
-    requires special privileges (such as root).
+    find ident listening to port 113, which on many platforms (such as
+    UNIX) requires special privileges (such as root).
 
-    Under Linux you can use "iptables" to forward requests from port 113 to
-    an unprivileged port. I was able to use this incantation to forward port
-    113 to port 8113:
+    Under Linux you can use iptables to forward requests from port 113 to
+    an unprivileged port. I was able to use this incantation to forward
+    port 113 to port 8113:
 
      # iptables -t nat -A PREROUTING -p tcp --dport 113 -j REDIRECT --to-port 8113
      # iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 113 -j REDIRECT --to-port 8113
@@ -108,13 +117,16 @@ CAVEATS
     required for clients connecting via the loopback interface (localhost).
 
 SEE ALSO
+
     RFC1413 <http://tools.ietf.org/html/rfc1413>, AnyEvent::Ident::Client,
     AnyEvent::Ident::Server
 
 AUTHOR
+
     Graham Ollis <plicease@cpan.org>
 
 COPYRIGHT AND LICENSE
+
     This software is copyright (c) 2013 by Graham Ollis.
 
     This is free software; you can redistribute it and/or modify it under
